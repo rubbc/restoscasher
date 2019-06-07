@@ -1,0 +1,12 @@
+<h1><%= @restaurant.name.titleize %></h1>
+
+
+<% @restaurant.items.each do |item| %>
+    <p><%= item.name.titleize %></p>
+    <p><%= item.price %></p>
+    <p><small> <i><%= item.description %></small></i> </p>
+  <% end %>
+<%= link_to 'Ajouter un plat', new_restaurant_item_path(@restaurant) %>
+
+
+<%= link_to 'restaurants', restaurants_path %>

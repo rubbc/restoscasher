@@ -1,0 +1,14 @@
+
+
+
+
+
+<h3>Ajouter un plat à votre carte</h3>
+<br>
+
+<%= simple_form_for [@restaurant, @item] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :price %>
+  <%= f.input :description %>
+  <%= f.submit "Ajouter un plat", class: "btn btn-primary" %>
+<% end %>

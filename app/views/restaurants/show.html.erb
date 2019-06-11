@@ -1,5 +1,23 @@
 <h1><%= @restaurant.name.titleize %></h1>
 <br>
+
+<%#= @restaurant.tag_list.first %>
+<%#= link_to @restaurant.tag_list.first, tagged_path(@restaurant.tag_list.first)  %>
+
+<% @restaurant.tag_list.each do |tag| %>
+  <%= link_to tag, tagged_path(tag: tag) %>
+<% end %>
+
+
+<p>Vous aimerez aussi</p>
+<% @related_restaurants.each do |restaurant| %>
+  <p><%= link_to restaurant.name, restaurants_path(restaurant) %></p>
+<% end %>
+
+
+
+<!-- CARTE DU RESTAURANT -->
+
 <h4>Carte du restaurant</h4>
 
 <% sections = %w(Entrée Plat Dessert) %>
@@ -9,7 +27,7 @@
   <% @restaurant.items.each do |item| %>
     <% if item.category == section %>
       <p><%= item.name.titleize %></p>
-      <p><%= item.price %></p>
+      <p><small><%= item.price %></small></p>
       <p><small> <i><%= item.description %></small></i> </p>
     <% end %>
   <% end %>

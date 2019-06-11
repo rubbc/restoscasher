@@ -1,0 +1,17 @@
+<%# params[:tag].to_i %>
+  <%# if params[:tag].to_i.between?(1, 21) %>
+<!--     <h1><%#= params[:tag] %>ème arrondissement</h1>
+ -->  <%# else %>
+<!--     <h1><%#= params[:tag] %></h1>
+ -->  <%# end %>
+
+
+<% @restaurants = @restaurants.uniq %>
+
+<ul>
+  <% @restaurants.each do |restaurant|%>
+    <p><%= link_to restaurant.name.titleize, restaurant_path(restaurant) %></p>
+  <% end %>
+</ul>
+
+<%= link_to 'restaurants'.titleize, restaurants_path %>

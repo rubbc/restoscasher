@@ -1,14 +1,17 @@
 
 
-
-
-
+<%= link_to @restaurant.name, restaurant_path(@restaurant) %>
 <h3>Ajouter un plat à votre carte</h3>
 <br>
 
+
+<div class="col-lg-6">
 <%= simple_form_for [@restaurant, @item] do |f| %>
   <%= f.input :name %>
   <%= f.input :price %>
+  <%#= f.input :category %>
+  <%= f.input :category, collection: [ "Entrée", "Plat", "Dessert"] %>
   <%= f.input :description %>
   <%= f.submit "Ajouter un plat", class: "btn btn-primary" %>
 <% end %>
+</div>

@@ -10,13 +10,16 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     # we need `restaurant_id` to asssociate item with corresponding restaurant
     @item.restaurant = Restaurant.find(params[:restaurant_id])
-    @item.save
-    redirect_to restaurant_path(@restaurant)
+    if @item.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new
+    end
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :description)
+    params.require(:item).permit(:name, :price, :description, :category)
   end
 end

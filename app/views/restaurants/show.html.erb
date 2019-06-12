@@ -7,8 +7,8 @@
 <% @restaurant.tag_list.each do |tag| %>
   <%= link_to tag, tagged_path(tag: tag) %>
 <% end %>
-
-
+<br>
+<br>
 <p>Vous aimerez aussi</p>
 <% @related_restaurants.each do |restaurant| %>
   <p><%= link_to restaurant.name, restaurants_path(restaurant) %></p>

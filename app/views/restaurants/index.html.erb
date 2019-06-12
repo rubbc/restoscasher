@@ -1,9 +1,40 @@
 <h1>Les restaurants</h1>
 
 
-<% @restaurants.each do |restaurant| %>
-  <p><%= link_to restaurant.name.titleize, restaurant_path(restaurant) %></p>
+<!-- Form search restaurant by name or tag -->
+<%= simple_form_for :search, url: root_path, method: "GET", html: {id: 'query' } do |f| %>
+  <%= f.input :name, input_html: {value: "", placeholder: "Un restaurant, un thème", class: 'search-restaurant'} %>
+  <%= f.submit "Chercher", class: "btn btn-primary" %>
 <% end %>
+
+<br>
+
+<!-- Search results -->
+
+<% found_restaurants_count = 0 %>
+
+<% @restaurants.each do |r| %>
+
+  <p><%= link_to r.name.titleize, restaurant_path(r) %></p>
+
+  <% found_restaurants_count = found_restaurants_count + 1 %>
+
+<% end %>
+
+<i><%= found_restaurants_count%> restaurants trouvés</i>
+
+<br><br>
+
+<h3>Most used tags 🚨</h3>
+
+<% ActsAsTaggableOn::Tag.most_used(3).each do |tag| %>
+
+  <% if tag.name.to_i == 0 %>
+    <%= link_to tag.name, tagged_path(tag: tag.name) %>
+  <% end %>
+
+<% end %>
+
 
 
 

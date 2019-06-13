@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+
+  skip_before_action :authenticate_user!, only: [:index, :show, :tagged]
   def index
     @restaurants = Restaurant.all
     @search = params["search"]
@@ -24,4 +26,27 @@ class RestaurantsController < ApplicationController
       @restaurants = Restaurant.all
     end
   end
+
+  def new
+    @restaurant = Restaurant.new
+  end
+
+   def create
+    @restaurant = current_user.restaurants.new(restaurant_params)
+    if @restaurant.save
+      @restaurant.save
+      redirect_to root_path
+    else
+      render :new
+    end
+    # Unless @restaurant.valid?, #save will return false,
+    # and @restaurant is not persisted.
+    # TODO: present the form again with error messages.
+
+  end
+
+
+  def restaurant_params
+      params.require(:restaurant).permit(:name, :user_id)
+    end
 end

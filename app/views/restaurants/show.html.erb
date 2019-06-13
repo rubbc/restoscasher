@@ -1,4 +1,8 @@
 <h1><%= @restaurant.name.titleize %></h1>
+<% if @restaurant.user %>
+  <p><%= @restaurant.user.email %></p>
+<% end %>
+
 <br>
 
 <%#= @restaurant.tag_list.first %>

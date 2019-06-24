@@ -1,0 +1,30 @@
+
+
+
+
+
+
+<div class="col-xs-12 col-md-4 col-lg-4">
+  <%= link_to restaurant_path(restaurant), class: 'text-deco-none' do %>
+      <div class="restaurant-card" style="background-color: <%= %w(#a0ccfd #11a4ea #fcb01c #6c94ad).sample %>">
+
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg">
+
+
+        <h2 class="restaurant-name"><%= restaurant.name.titleize %></h2>
+        <p class="restaurant-address"><small><%= restaurant.address %></small></p>
+        <div class="tags-on-card">
+          <% restaurant.tag_list.sample(2).each do |tag| %>
+
+              <span class="tag-on-card"><%= tag %></span>
+
+          <% end %>
+        </div>
+
+   </div>
+  <% end %>
+</div>
+
+
+
+

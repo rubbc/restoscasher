@@ -5,13 +5,16 @@
 <!--     <h1><%#= params[:tag] %></h1>
  -->  <%# end %>
 
+<h1><%= params[:tag].titleize %></h1>
+
 
 <% @restaurants = @restaurants.uniq %>
-
-<ul>
+<br><br>
+<div class="row" style="padding: 0 10%">
   <% @restaurants.each do |restaurant|%>
-    <p><%= link_to restaurant.name.titleize, restaurant_path(restaurant) %></p>
-  <% end %>
-</ul>
+    <%= render 'components/card', restaurant: restaurant %>
+<!--     <p><%#= link_to restaurant.name.titleize, restaurant_path(restaurant) %></p>
+ -->  <% end %>
+</div>
 
 <%= link_to 'restaurants'.titleize, restaurants_path %>

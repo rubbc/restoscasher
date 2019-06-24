@@ -1,0 +1,120 @@
+.restaurant-card{
+  overflow: hidden;
+  height: 60vh;
+  border-radius: 30px;
+  position: relative;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 10%;
+
+  h2.restaurant-name{
+    font-weight: 600;
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    color: white;
+  }
+  p.restaurant-address{
+    font-size: 20px;
+    position: absolute;
+    top: 55%;
+    left: 5%;
+    color: white;
+  }
+
+  img{
+  min-height: 40%;
+  max-height: 40%;
+  width: 100%;
+  }
+}
+
+.restaurant-card .tags-on-card{
+  position: absolute;
+  bottom: 7%;
+  left: 5%;
+  display: block;
+
+  .tag-on-card{
+    background-color: #efefef;
+    opacity: 0.3;
+    padding: 5px 10px;
+    font-size: 15px;
+    color: black;
+    border-radius: 30px;
+    transition: 0.4s;
+    max-width: 30%;
+    line-height: 30px;
+    overflow: hidden;
+  }
+
+
+}
+
+.text-deco-none{
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.8s;
+  display: block;
+  :hover{
+    box-shadow: none;
+  }
+}
+
+
+
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  body.restaurants.index{
+    div.index-design{
+      padding: 0 10%;
+    }
+
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  padding: 0 10%;
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

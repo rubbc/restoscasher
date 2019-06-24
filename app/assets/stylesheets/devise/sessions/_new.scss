@@ -1,0 +1,49 @@
+
+body.devise\/sessions.new{
+  background-color: white;
+
+  div.header-sign-in{
+    height: 30vh;
+    background-color: #a0ccfd;
+    display: flex;
+    align-items: center;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center !important;
+    // -webkit-transform: skewY(-1deg);
+    // transform: skewY(-1deg);
+}
+
+
+div.footer-div{
+  height: 3vh;
+  background-color: #a0ccfd;
+  // z-index: 1;
+  margin-top: -50px;
+}
+
+div.milieu-div{
+
+  height: 5vh;
+  background-color: #a0ccfd;
+  // z-index: 2;
+  -webkit-transform: skewY(1deg);
+  transform: skewY(1deg);
+
+}
+
+
+.form-float{
+  margin-top: -100px;
+  .form_shadow{
+    z-index: 3;
+    background-color: white;
+  }
+}
+
+}
+
+

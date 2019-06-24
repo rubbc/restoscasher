@@ -1,0 +1,8 @@
+<h1>Les plats du restaurant</h1>
+
+
+<ul>
+  <% @restaurant.items.each do |item| %>
+    <li><%= item.name %></li>
+  <% end %>
+</ul>

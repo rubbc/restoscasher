@@ -1,21 +1,21 @@
 <h1><%= @restaurant.name.titleize %></h1>
-<% if @restaurant.user %>
-  <p><%= @restaurant.user.email %></p>
-<% end %>
-
+<%# if @restaurant.user %>
+<!--   <p><%#= @restaurant.user.email %></p>
+ --><%# end %>
+<p><%= @restaurant.address %></p>
 <br>
 
 <%#= @restaurant.tag_list.first %>
 <%#= link_to @restaurant.tag_list.first, tagged_path(@restaurant.tag_list.first)  %>
 
 <% @restaurant.tag_list.each do |tag| %>
-  <%= link_to tag, tagged_path(tag: tag) %>
+  <%= link_to tag, tagged_path(tag: tag), { :class=>"tag" } %>
 <% end %>
 <br>
 <br>
 <p>Vous aimerez aussi</p>
-<% @related_restaurants.each do |restaurant| %>
-  <p><%= link_to restaurant.name, restaurants_path(restaurant) %></p>
+<% @related_restaurants.sample(3).each do |restaurant| %>
+  <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
 <% end %>
 
 
@@ -39,7 +39,11 @@
 
 
 
-<%= link_to 'Ajouter un plat', new_restaurant_item_path(@restaurant) %>
 <br>
 
 <%= link_to 'restaurants', restaurants_path %>
+<% if policy(@restaurant).update? %>
+  <%= link_to 'Ajouter un plat', new_restaurant_item_path(@restaurant) %>
+  <%= link_to 'edit',  edit_restaurant_path(@restaurant) %>
+<% end %>
+

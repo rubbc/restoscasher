@@ -1,42 +1,145 @@
-<h1>Les restaurants</h1>
 
 
-<!-- Form search restaurant by name or tag -->
-<%= simple_form_for :search, url: root_path, method: "GET", html: {id: 'query' } do |f| %>
-  <%= f.input :name, input_html: {value: "", placeholder: "Un restaurant, un thème", class: 'search-restaurant'} %>
-  <%= f.submit "Chercher", class: "btn btn-primary" %>
+<!-- SEARCH -->
+<% content_for :above_container do %>
+    <%= render 'components/search' %>
 <% end %>
-
-<br>
-
-<!-- Search results -->
 
 <% found_restaurants_count = 0 %>
 
-<% @restaurants.each do |r| %>
+<div>
+  <% if params["search"] %>
+    <h3 style="color: #e2e2e2">Les résultats pour : <span style="color: #11a4ea">"<%= params["search"]["name"] %>"</span></h3>
+  <% end %>
+</div>
 
-  <p><%= link_to r.name.titleize, restaurant_path(r) %></p>
+<br>
 
-  <% found_restaurants_count = found_restaurants_count + 1 %>
 
-<% end %>
+<div class="row unwrap">
+  <div class="row_inner">
+    <% @restaurants.uniq.each do |restaurant| %>
+    <%= link_to restaurant_path(restaurant) do %>
+      <div class="restaurant-element" style="background-color: <%= %w(#a0ccfd #11a4ea #fcb01c #6c94ad).sample %>">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg">
+        <h2 class="restaurant-name"><%= restaurant.name.titleize %></h2>
+        <p class="restaurant-address"><%= restaurant.address %></p>
+        <div class="tags-on-card">
+          <% restaurant.tag_list.sample(4).each do |tag| %>
+              <span class="tag-on-card"><%= tag %></span>
+          <% end %>
+        </div>
+      </div>
+      <% found_restaurants_count = found_restaurants_count + 1 %>
+      <% end %>
+    <% end %>
+  </div>
 
-<i><%= found_restaurants_count%> restaurants trouvés</i>
+</div>
+
+
+<div class="flash-alert flash-index flash-success-index alert-dismissible fade show" role="alert">
+  <a data-dismiss="alert" aria-label="Close">
+    <% case found_restaurants_count %>
+      <% when 0 %>
+       <i><strong>Oooh</strong> 😕 <%= found_restaurants_count%> restaurant trouvé</i>
+      <% when 0..1 %>
+        <i><strong>Yay!</strong> 🎉 <%= found_restaurants_count%> restaurant trouvé</i>
+      <% else %>
+        <i><strong>Yay!</strong> 🎉 <%= found_restaurants_count%> restaurants trouvés</i>
+    <% end %>
+  </a>
+</div>
+
+<div class="cta-centered">
+
+  <%= link_to 'Vous êtes propriétaire de restaurant ?', new_restaurant_path, class: "button-add-restaurant" %>
+</div>
+
 
 <br><br>
+<hr style="z-index: -1; ">
+<h2  class="text-center" style="background-color: white; margin-top: -40px">Combinez les thèmes</h2>
+<% content_for :below_container do %>
 
-<h3>Most used tags 🚨</h3>
+<div class="row">
+  <div class="col-xs-10 col-md-6  offset-md-3">
+    <div class="choose-with-theme">
+      <div class="picture">
+      </div>
+      <div class="theme-text">
+        <div>
+        <h4>Un Italien en amoureux 🇮🇹</h4>
+        <p>Emmenez votre amoureuse dans les meilleurs italiens cashers de paris</p>
+        <ul class="list-group">
+          <% Restaurant.tagged_with(['italien', 'en amoureux']).each do |restaurant| %>
+            <%= link_to restaurant_path(restaurant) do %>
+             <li class="list-item list-unstyled">
+               <span class="tag-on-card"><%= restaurant.name %></span>
+             </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      </div>
+    </div>
+        <div class="choose-with-theme">
+      <div class="picture">
+      </div>
+      <div class="theme-text">
+        <div>
+        <h4>Bonne soirée garantie</h4>
+        <p>Pour kiffer entre potes, quelques adresses incontorunables !</p>
+        <ul class="list-group">
+          <% Restaurant.tagged_with(['bonne soiree garantie', 'hamburger']).each do |restaurant| %>
+            <%= link_to restaurant_path(restaurant) do %>
+             <li class="list-item list-unstyled">
+               <span class="tag-on-card"><%= restaurant.name %></span>
+             </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<% ActsAsTaggableOn::Tag.most_used(3).each do |tag| %>
 
-  <% if tag.name.to_i == 0 %>
-    <%= link_to tag.name, tagged_path(tag: tag.name) %>
-  <% end %>
+<div class="cta-centered">
+
+  <%= link_to 'Vous êtes propriétaire de restaurant ?', new_restaurant_path, class: "button-add-restaurant" %>
+</div>
+
+
+
 
 <% end %>
 
 
-<%= link_to 'new restaurant', new_restaurant_path %>
+
+
+
+
+
+
+
+
+
+
+
+<!-- SCRIPT -->
+<script>
+  setTimeout(() => {
+   // document.querySelector(".flash-alert").classList.add("disappear")
+  }, 4000);
+
+
+</script>
+
+
+
+
 
 
 
